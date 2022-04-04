@@ -1,0 +1,47 @@
+{
+    "version": 1,
+    "disable_existing_loggers": false,
+    "formatters": {
+        "short": {
+            "format": "%(asctime)s - %(levelname)s - %(message)s"
+        },
+        "long": {
+            "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+        }
+    },
+
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "level": "DEBUG",
+            "formatter": "long",
+            "stream": "ext://sys.stdout"
+        },
+
+        "all_file_handler": {
+            "class": "logging.handlers.TimedRotatingFileHandler",
+            "level": "DEBUG",
+            "formatter": "long",
+            "filename": "logs/player/all.log",
+            "when": "midnight",
+            "interval": 1,
+            "backupCount": 14,
+            "encoding": "utf8"
+        },
+
+        "warn_file_handler": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "level": "WARN",
+            "formatter": "long",
+            "filename": "logs/player/errors.log",
+            "maxBytes": 5242880,
+            "backupCount": 5,
+            "encoding": "utf8"
+        }
+    },
+
+    "root": {
+        "level": "DEBUG",
+        "handlers": ["console", "all_file_handler", "warn_file_handler"]
+    }
+}

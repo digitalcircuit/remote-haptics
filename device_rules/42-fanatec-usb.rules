@@ -1,0 +1,6 @@
+# Fanatec USB ClubSport Shifter
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="0eb7", ATTRS{idProduct}=="1a92", ATTRS{manufacturer}=="FANATEC", TAG+="uaccess"
+# Fanatec USB ClubSport Pedal
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="0eb7", ATTRS{idProduct}=="1a95", ATTRS{manufacturer}=="FANATEC", TAG+="uaccess"
+# Fanatec USB ClubSport adapter "HID USB Bootloader" mode
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="0eb7", ATTRS{idProduct}=="1a2e", ATTRS{manufacturer}=="Fanatec", TAG+="uaccess"

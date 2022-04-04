@@ -1,0 +1,25 @@
+# Backup files
+*~
+
+# See https://github.com/github/gitignore/blob/main/Python.gitignore
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Python virtual environment
+.env
+
+# Runtime data
+certs/certs-config.cnf
+certs/*.cert
+certs/*.key
+logs/
+recordings/
+
+# Local configuration
+config/config-*.ini
+
+# Temporary: build files for Impulse
+# Source code is not yet included into repository, see `TODO.md` for details
+remote_haptics/impulse-print
