@@ -1,9 +1,9 @@
-'''
+"""
 Copyright: (c) 2022, Shane Synan <digitalcircuit36939@gmail.com>
 GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 @package RemoteHaptics
-'''
+"""
 
 # Extra debug verbosity
 # > API and protocol debugging
@@ -20,7 +20,7 @@ PERSIST_DURATION_SECS = 15
 # This limits network traffic and physics calculation updates
 #
 # 60 FPS (feedbacks per second) should be good
-MAX_UPDATE_RATE_SECS = (1 / 60)
+MAX_UPDATE_RATE_SECS = 1 / 60
 
 # Default network port number if not specified
 # First step towards standardization

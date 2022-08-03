@@ -11,6 +11,7 @@ System needed:
 * Python 3
 * The Linux `evdev` Python module (support for Windows should happen in the future)
 * Some sort of haptics device supported by the Linux force-feedback system (e.g. game controller with rumble)
+* Python code is [formatted using Black](https://black.readthedocs.io/ )
 * *To be done - expand this list?*
 
 ## Usage

@@ -1,0 +1,2 @@
+# MPV support in haptics playback 
+python-mpv-jsonipc
