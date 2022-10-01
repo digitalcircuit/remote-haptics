@@ -1,5 +1,6 @@
 ### Remaining cleanup steps
 
+* [ ] Use default platform locations for configuration (e.g. [XDG Base Directory Specification for Linux](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html ))
 * [ ] Include [Impulse source from Actinic](https://github.com/digitalcircuit/actinic/tree/main/Actinic/Audio/impulse ) (submodule?) and build `impulse-print`
   * Only `impulse-print` is needed by `remote_haptics/haptics_audio.py`
 * [ ] Make a `README.md` file
