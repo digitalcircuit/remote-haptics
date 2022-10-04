@@ -159,9 +159,11 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--ssl-cert",
-        help="SSL/TLS public certificate",
+        help="SSL/TLS public certificate, default: {0}".format(
+            platform_config.PATH_CERTS_SERVER_CERT
+        ),
         metavar="<server.cert>",
-        default=os.path.join("certs", "server.cert"),
+        default=platform_config.PATH_CERTS_SERVER_CERT,
     )
     args = parser.parse_args()
 
@@ -183,6 +185,13 @@ if __name__ == "__main__":
                     args.server_addr
                 )
             )
+        if not args.insecure and not os.path.isfile(args.ssl_cert):
+            print(
+                "Error: SSL/TLS certificate '{0}' cannot be read, create certificate or specify '--insecure' to disable encryption".format(
+                    args.ssl_cert
+                )
+            )
+            raise SystemExit
 
     asyncio.run(
         main(

@@ -162,15 +162,19 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--ssl-cert",
-        help="SSL/TLS public certificate",
+        help="SSL/TLS public certificate, default: {0}".format(
+            platform_config.PATH_CERTS_SERVER_CERT
+        ),
         metavar="<server.cert>",
-        default=os.path.join("certs", "server.cert"),
+        default=platform_config.PATH_CERTS_SERVER_CERT,
     )
     parser.add_argument(
         "--ssl-key",
-        help="SSL/TLS private key",
+        help="SSL/TLS private key, default: {0}".format(
+            platform_config.PATH_CERTS_SERVER_KEY
+        ),
         metavar="<server.key>",
-        default=os.path.join("certs", "server.key"),
+        default=platform_config.PATH_CERTS_SERVER_KEY,
     )
     args = parser.parse_args()
 
@@ -181,6 +185,20 @@ if __name__ == "__main__":
                 args.listen
             )
         )
+    if not args.insecure and not os.path.isfile(args.ssl_cert):
+        print(
+            "Error: SSL/TLS certificate '{0}' cannot be read, create certificate or specify '--insecure' to disable encryption".format(
+                args.ssl_cert
+            )
+        )
+        raise SystemExit
+    if not args.insecure and not os.path.isfile(args.ssl_key):
+        print(
+            "Error: SSL/TLS key '{0}' cannot be read, create private key or specify '--insecure' to disable encryption".format(
+                args.ssl_key
+            )
+        )
+        raise SystemExit
 
     asyncio.run(
         main(

@@ -44,3 +44,28 @@ fi
 #openssl req -x509 -newkey rsa:2048 -keyout server.key -nodes -out server.cert -sha256 -days "$CERT_VALID_DAYS"
 #openssl req -x509 -newkey rsa:4096 -keyout "$CERT_KEY" -nodes -out "$CERT_FILE" -config generate-certs-config.cnf -days "$CERT_VALID_DAYS"
 openssl req -x509 -newkey rsa:4096 -keyout "$CERT_KEY" -nodes -out "$CERT_FILE" -config certs-config.cnf -days "$CERT_VALID_DAYS"
+
+# Try to find XDG path
+DATA_DIR=${XDG_DATA_HOME:-$HOME/.local/share}
+if command -v systemd-path >/dev/null; then
+    DATA_DIR="$(systemd-path user-shared)"
+fi
+DATA_CERT_DIR="$DATA_DIR/RemoteHaptics/certs/"
+echo "------------"
+echo "[i] To use this certificate and key by default, move '$CERT_FILE' and '$CERT_KEY' inside"
+echo "    '$DATA_CERT_DIR'"
+if yes_or_no "Move cert/key inside default RemoteHaptics folder?"; then
+	if [ -f "$DATA_CERT_DIR/$CERT_FILE" ] || [ -f "$DATA_CERT_DIR/$CERT_KEY" ]; then
+		if yes_or_no "/!\ Key already exists!  Overwrite private key?"; then
+			# Make backup copy
+			mv "$DATA_CERT_DIR/$CERT_FILE" "$DATA_CERT_DIR/$CERT_FILE.bak"
+			mv "$DATA_CERT_DIR/$CERT_KEY" "$DATA_CERT_DIR/$CERT_KEY.bak"
+		else
+			exit 1
+		fi
+	fi
+	mkdir --parents "$DATA_CERT_DIR"
+	mv "$CERT_FILE" "$DATA_CERT_DIR/$CERT_FILE"
+	mv "$CERT_KEY" "$DATA_CERT_DIR/$CERT_KEY"
+	echo "Certificate and key moved!"
+fi
