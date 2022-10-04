@@ -175,12 +175,12 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if not ":" in args.listen:
+        args.listen = "{0}:{1}".format(args.listen, haptics.NET_DEFAULT_PORT)
         print(
-            "Listen address must include ':', e.g. '127.0.0.1:{0}'".format(
-                haptics.NET_DEFAULT_PORT
+            "Listening port not specified, assuming default port: '{0}'".format(
+                args.listen
             )
         )
-        raise SystemExit
 
     asyncio.run(
         main(
