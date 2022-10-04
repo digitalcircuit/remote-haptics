@@ -18,7 +18,7 @@ logs/
 recordings/
 
 # Local configuration
-config/config-*.ini
+config/haptic-*.ini
 
 # Temporary: build files for Impulse
 # Source code is not yet included into repository, see `TODO.md` for details

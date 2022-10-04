@@ -38,6 +38,9 @@ import asyncio
 # Configuration
 from remote_haptics import haptics
 
+# Platform integration
+from remote_haptics import platform_config
+
 # Controller input
 from remote_haptics.haptics_send import SenderManager
 
@@ -135,12 +138,15 @@ if __name__ == "__main__":
         metavar="<hostname:port>",
         nargs="?",
     )
+    default_config_path = os.path.join(
+        platform_config.PATH_CONFIGURATION, "haptic-sender.ini"
+    )
     parser.add_argument(
         "-c",
         "--config-file",
-        help="path to configuration file (default: config/config-sender.ini)",
+        help="path to configuration file (default: {0}".format(default_config_path),
         metavar="<path>",
-        default=os.path.join("config", "config-sender.ini"),
+        default=default_config_path,
     )
     parser.add_argument(
         "-w",

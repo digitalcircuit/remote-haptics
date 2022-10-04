@@ -38,6 +38,9 @@ import asyncio
 # Configuration
 from remote_haptics import haptics
 
+# Platform integration
+from remote_haptics import platform_config
+
 # Rumble output
 from remote_haptics.haptics_receive import ReceiverManager
 
@@ -129,12 +132,15 @@ async def main(config_file, write_config, listen_addr, disable_ssl, ssl_cert, ss
 if __name__ == "__main__":
     setup_logging()
     parser = argparse.ArgumentParser(description="Haptics driver and API server.")
+    default_config_path = os.path.join(
+        platform_config.PATH_CONFIGURATION, "haptic-receiver.ini"
+    )
     parser.add_argument(
         "-c",
         "--config-file",
-        help="path to configuration file (default: config/config-receiver.ini)",
+        help="path to configuration file (default: {0}".format(default_config_path),
         metavar="<path>",
-        default=os.path.join("config", "config-receiver.ini"),
+        default=default_config_path,
     )
     parser.add_argument(
         "-w",
