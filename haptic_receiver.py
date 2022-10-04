@@ -138,7 +138,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "-c",
         "--config-file",
-        help="path to configuration file (default: {0}".format(default_config_path),
+        help="path to configuration file, default: {0}".format(default_config_path),
         metavar="<path>",
         default=default_config_path,
     )
